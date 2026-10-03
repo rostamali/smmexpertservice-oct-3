@@ -1,0 +1,252 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-site-primary: #2563eb;
+    --color-site-secondary: #3b82f6;
+
+    --color-site-gray-bg: #f5f5f5;
+    --color-site-light-border: #eaedee;
+    --color-site-heading-font: #1a1a1a;
+    --color-site-body-font: #848e9c;
+}
+
+@keyframes nexa-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(0, -8px, 0);
+    }
+}
+
+@keyframes nexa-shine {
+    0% {
+        transform: translateX(-140%) skewX(-18deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.5;
+    }
+    60%,
+    100% {
+        transform: translateX(260%) skewX(-18deg);
+        opacity: 0;
+    }
+}
+.home-products-swiper {
+    overflow: visible !important;
+}
+.home-products-swiper .swiper-wrapper {
+    overflow: visible;
+}
+.home-products-swiper .swiper-slide {
+    overflow: visible;
+}
+
+@layer utilities {
+    body {
+        @apply bg-site-gray-bg;
+    }
+    .container {
+        @apply max-w-[1200px] mx-auto relative;
+    }
+    /* ================ Payment Page Scroll ================ */
+    .payment-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .payment-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .payment-scrollbar::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 9999px;
+    }
+
+    .payment-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #9ca3af;
+    }
+}
+
+@layer components {
+    .header__nav-link {
+        @apply text-[15px] leading-[1em];
+        @apply px-[10px] pt-[7px] pb-[9px];
+        @apply rounded-md;
+        @apply transition hover:bg-slate-50 hover:text-slate-950;
+    }
+    .header__nav-mobile-link {
+        @apply text-[14px] font-normal;
+        @apply py-1;
+        @apply hover:text-slate-950;
+        @apply transition;
+    }
+    .footer__nav-link {
+        @apply text-[12px] sm:text-[14px] font-medium text-white;
+        @apply transition;
+        @apply hover:underline;
+    }
+
+    .btn__primary {
+        @apply sm:w-auto;
+        @apply items-center justify-center gap-2;
+        @apply text-sm font-semibold text-white;
+        @apply bg-[#3B82F6] hover:bg-[#2563EB];
+        @apply rounded-lg;
+        @apply shadow-[0_4px_14px_rgba(59,130,246,0.28)] hover:shadow-[0_8px_24px_rgba(59,130,246,0.3)];
+        @apply transition-all duration-200;
+    }
+    .btn__ghost {
+        @apply sm:w-auto;
+        @apply items-center justify-center gap-2;
+        @apply rounded-lg border border-slate-300 hover:border-slate-400;
+        @apply bg-white hover:bg-slate-50;
+        @apply text-sm font-semibold text-slate-700;
+        @apply shadow-sm;
+        @apply transition-all duration-200;
+    }
+
+    /* ================ Shared Styles ================ */
+    .bg__gradient-primary {
+        @apply bg-gradient-to-r from-site-secondary to-site-primary;
+        @apply transition;
+    }
+    .bg__gradient-primary:hover {
+        @apply from-site-primary/90 to-site-secondary;
+    }
+
+    .card-box {
+        @apply p-5 sm:p-6 lg:p-8;
+        @apply rounded-[20px] sm:rounded-[25px] border border-site-light-border;
+        @apply bg-white shadow-[0_14px_40px_rgba(10,22,94,.06)];
+    }
+    .page__title {
+        @apply text-[30px] sm:text-[35px] font-semibold tracking-[-0.045em] text-site-heading-font leading-[1.2];
+    }
+
+    /* ================ Slider Styles ================ */
+    .hero-lg-slider .swiper-pagination {
+        @apply inline-flex;
+        @apply border border-site-light-border;
+        @apply bg-white/70;
+        @apply !w-auto px-[2px] py-[3px] rounded-full;
+        @apply !left-[50%] translate-x-[-50%];
+    }
+    .hero-lg-slider .swiper-pagination .swiper-pagination-bullet-active {
+        @apply !w-[20px];
+        @apply !rounded-[4px];
+    }
+    .hero-lg-slider .swiper-button-next,
+    .hero-lg-slider .swiper-button-prev {
+        @apply border border-site-light-border rounded-full hover:border-white;
+        @apply bg-white/70 hover:bg-white/90;
+        @apply !w-[35px] lg:!w-[42px] !h-[35px] lg:!h-[42px];
+        @apply transition;
+
+        &:hover svg {
+            @apply text-site-primary;
+        }
+    }
+    .hero-lg-slider .swiper-button-next svg,
+    .hero-lg-slider .swiper-button-prev svg {
+        @apply !h-[12px] lg:!h-[16px] text-site-primary;
+    }
+
+    /* ================ Product Card ================ */
+    .product__card {
+        @apply p-2 sm:p-4 h-full bg-white;
+        @apply flex flex-col overflow-hidden;
+        @apply rounded-[15px] sm:rounded-[25px] border border-site-light-border;
+        @apply shadow-[0_8px_28px_rgba(15,23,42,.06)] hover:-translate-y-1.5 hover:shadow-[0_16px_42px_rgba(59,130,246,.12)];
+        @apply transition duration-300;
+    }
+    .product__badge {
+        @apply text-[9px] uppercase tracking-[1.002px] font-semibold text-white;
+        @apply px-[6px] sm:px-[8px] pt-[4px] sm:pt-[6px] pb-[3px] sm:pb-[5px];
+        @apply absolute left-1.5 sm:left-3 top-1.5 sm:top-3;
+        @apply rounded-[4px] sm:rounded-[6px];
+        @apply bg-red-500;
+    }
+
+    .product__card-cta--btn {
+        @apply bg-gradient-to-r from-site-secondary to-site-primary text-white;
+        @apply grid h-7 w-7 sm:h-8 sm:w-8 place-items-center rounded-lg transition;
+    }
+
+    /* ================ Breadcrumb ================ */
+    .page__breadcrumb {
+        @apply flex flex-wrap items-center gap-2;
+    }
+    .page__breadcrumb-link {
+        @apply text-[13px] font-medium text-site-body-font hover:text-site-primary transition duration-200;
+    }
+
+    /* ================ Single Product Page ================ */
+    .single__product-box {
+        @apply p-5 sm:p-6 lg:p-8;
+        @apply rounded-[25px] border border-site-light-border;
+        @apply bg-white shadow-[0_14px_40px_rgba(10,22,94,.06)];
+    }
+    .single__product-variation-configuration {
+        @apply scroll-mt-28;
+    }
+    .single__product-variation-required--badge {
+        @apply bg-[#FEF2F2];
+        @apply text-[#B91C1C];
+        @apply border border-[#FECACA] rounded-full;
+        @apply px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide;
+    }
+    .single__product-title {
+        @apply text-[28px] sm:text-[35px] font-semibold leading-[1.2] tracking-[-0.045em] text-site-heading-font;
+        @apply max-w-4xl;
+    }
+    .single__product-short-description {
+        @apply max-w-4xl;
+        @apply text-[15px] sm:text-base leading-7 text-site-body-font;
+    }
+    .single__product-badge {
+        @apply text-[12px] font-medium;
+        @apply rounded-[6px] border;
+        @apply py-[4px] px-[6px];
+        @apply inline-flex items-center gap-1.5;
+    }
+    .single__product-included {
+        @apply text-[12px];
+    }
+
+    /* ================ Cart Page ================ */
+    .cart__qty-wrap {
+        @apply overflow-hidden;
+        @apply inline-flex items-center;
+        @apply rounded-[12px];
+        @apply bg-site-gray-bg p-[4px];
+    }
+    .cart__qty-btn {
+        @apply h-[32px] w-[32px];
+        @apply rounded-[6px];
+        @apply bg-white;
+        @apply grid place-items-center;
+        @apply transition cursor-pointer;
+    }
+
+    /* ================ Payment Page ================ */
+    .payment__card {
+        @apply max-w-[750px] mx-auto;
+
+        @apply p-[18px] sm:p-6 lg:p-8;
+        @apply rounded-[20px] sm:rounded-[25px] border border-site-light-border;
+        @apply bg-white shadow-[0_14px_40px_rgba(10,22,94,.06)];
+    }
+
+    .crypt__payment-meta-card {
+        @apply flex flex-col gap-2;
+    }
+    .crypto__payment-meta-label {
+        @apply block text-xs text-[#545454];
+    }
+    .crypto__payment-meya-value {
+        @apply uppercase text-site-heading-font font-bold;
+    }
+}

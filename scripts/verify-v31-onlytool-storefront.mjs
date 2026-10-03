@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root = process.cwd();
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+const exists = (file) => fs.existsSync(path.join(root, file));
+const checks = [];
+const check = (label, ok) => checks.push([label, Boolean(ok)]);
+const home = read('src/app/page.tsx');
+const layout = read('src/app/layout.tsx');
+const header = read('src/components/Header.tsx');
+const footer = read('src/components/Footer.tsx');
+const product = read('src/components/ProductCard.tsx');
+const slider = read('src/components/HeroSlider.tsx');
+const drawer = read('src/components/ui/drawer.tsx');
+const button = read('src/components/ui/button.tsx');
+const card = read('src/components/ui/card.tsx');
+check('Dark navy storefront theme tokens', layout.includes("--bg': '#050816'") && layout.includes("--panel': '#0b1024'") && layout.includes("--brand': primaryColor"));
+check('Shared page transition exists', exists('src/components/PageTransition.tsx') && read('src/components/SiteChrome.tsx').includes('<PageTransition>'));
+check('OnlyTool-inspired glow hero composition', home.includes('bg-blue-600/20') && home.includes('tracking-[-0.065em]') && home.includes('<HeroSlider'));
+check('Static promotional slider retained', slider.includes('slideData.map') && slider.includes('AUTOPLAY_MS = 5200'));
+check('Dark product card glow and zoom', product.includes('group-hover:scale-[1.1]') && product.includes('hover:border-blue-400/25') && product.includes('<Card'));
+check('Dark glass desktop mega menu', header.includes('backdrop-blur-xl') && header.includes('Shop featured products') && header.includes('featuredProducts.map'));
+check('Top mobile drawer retained', header.includes('side="top"') && drawer.includes("top: {") && drawer.includes("hidden: '-translate-y-full'"));
+check('Dark conversion footer', footer.includes('bg-[#040712]') && footer.includes('bg-blue-600/10'));
+check('shadcn primitives use dark tokens', button.includes('bg-[var(--brand)]') && card.includes('bg-[#0b1024]/90'));
+check('Site-specific reviews still power testimonials', home.includes('getCachedSiteReviews') && home.includes('<TestimonialsMarquee reviews={reviews}'));
+let failed = 0;
+for (const [label, ok] of checks) { console.log(`${ok ? '✓' : '✗'} ${label}`); if (!ok) failed += 1; }
+if (failed) { console.error(`V31 storefront verification failed (${failed}/${checks.length}).`); process.exit(1); }
+console.log(`V31 storefront verification passed (${checks.length}/${checks.length}).`);
